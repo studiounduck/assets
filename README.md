@@ -1,16 +1,206 @@
-# React + Vite
+# 📊 회계 관리 시스템
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Firebase 기반의 실시간 회계 관리 웹 애플리케이션입니다. 거래 내역을 기록하고, 자동으로 재무제표를 생성하며, 관리자 승인 시스템으로 안전하게 사용자를 관리할 수 있습니다.
 
-Currently, two official plugins are available:
+## ✨ 주요 기능
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 📝 **거래 내역 관리**: 수입/지출 거래를 간편하게 기록
+- 📈 **자동 재무제표 생성**: 손익계산서, 재무상태표, 현금흐름표 자동 생성
+- 🔍 **거래 검색**: 내용, 카테고리, 메모 등으로 거래 내역 검색
+- 👥 **관리자 승인 시스템**: 신규 사용자를 관리자가 승인 후 사용 가능
+- 📊 **대시보드**: 주요 재무 지표를 한눈에 확인
+- 🌐 **실시간 동기화**: Firebase 기반 실시간 데이터 업데이트
 
-## React Compiler
+## 🚀 사용 방법
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 1️⃣ 회원가입 및 로그인
 
-## Expanding the ESLint configuration
+#### 신규 가입
+1. 로그인 페이지에서 **"회원가입"** 링크 클릭
+2. 이메일과 비밀번호 입력 (비밀번호는 6자 이상)
+3. 회원가입 완료 후 **관리자 승인 대기** 상태로 전환
+4. 관리자의 승인을 기다립니다
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+> 💡 관리자 승인이 완료되면 로그인하여 서비스를 이용할 수 있습니다.
+
+#### 로그인
+- **이메일/비밀번호**: 가입한 이메일과 비밀번호로 로그인
+- **Google 로그인**: Google 계정으로 간편 로그인
+
+### 2️⃣ 대시보드 확인
+
+로그인하면 대시보드 페이지가 표시됩니다.
+
+**확인 가능한 정보:**
+- 📊 **월별 재무 지표**: 총자산, 총부채, 순자산, 이번 달 순이익
+- 📈 **월별 추이**: 수입, 지출, 순이익 그래프
+- 💰 **지출 내역**: 카테고리별 지출 분석
+- 💵 **현금 흐름**: 월별 현금 흐름 추이
+
+**월 선택:**
+- 상단의 월 선택 버튼(◀ 2024년 11월 ▶)으로 원하는 월의 데이터를 확인할 수 있습니다
+
+### 3️⃣ 거래 내역 관리
+
+#### 거래 추가
+1. 상단 메뉴에서 **"거래내역"** 클릭
+2. **"+ 새 거래"** 버튼 클릭
+3. 거래 정보 입력:
+   - **날짜**: 거래 발생 날짜
+   - **유형**: 수입 또는 지출
+   - **금액**: 거래 금액
+   - **카테고리**: 거래 분류 (예: 급여, 식비, 교통비)
+   - **설명**: 거래 내용
+   - **결제 방법**: 현금, 카드, 계좌이체 등
+   - **메모**: 추가 메모 (선택사항)
+4. **"저장"** 버튼 클릭
+
+#### 거래 수정
+1. 거래내역 목록에서 수정할 거래 클릭
+2. 정보 수정 후 **"저장"** 버튼 클릭
+
+#### 거래 삭제
+1. 거래 수정 모달에서 **"삭제"** 버튼 클릭
+2. 확인 후 삭제
+
+### 4️⃣ 거래 검색
+
+1. 상단 헤더의 **돋보기 아이콘** 클릭
+2. 검색 모달에 검색어 입력
+3. **"검색"** 버튼 클릭 또는 Enter 키 입력
+4. 검색 결과 페이지에서 일치하는 거래 내역 확인
+
+**검색 대상:**
+- 거래 내용 (설명)
+- 카테고리
+- 메모
+- 결제 방법
+
+### 5️⃣ 재무제표 확인
+
+상단 메뉴에서 **"재무제표"** 클릭하면 3가지 재무제표를 확인할 수 있습니다.
+
+#### 손익계산서
+- 기간별 수익과 비용을 확인
+- 순이익/순손실 계산
+- 월별 또는 연도별 조회 가능
+
+#### 재무상태표
+- 자산, 부채, 자본 현황
+- 누적 재무 상태 확인
+
+#### 현금흐름표
+- 영업활동, 투자활동, 재무활동별 현금 흐름
+- 기간별 현금 증감 내역
+
+### 6️⃣ 관리자 기능
+
+관리자 계정으로 로그인하면 상단 메뉴에 **"관리"** 항목이 표시됩니다.
+
+#### 사용자 승인
+1. **"관리"** 메뉴 클릭
+2. **승인 대기 중** 섹션에서 신규 가입 사용자 확인
+3. **"승인"** 또는 **"거부"** 버튼 클릭
+
+#### 사용자 관리
+- 승인된 사용자 목록 확인
+- 사용자 역할 변경 (관리자 ↔ 사용자)
+- 승인 취소
+
+### 7️⃣ 계정 관리
+
+1. 상단 헤더의 **사용자 아이콘** 클릭
+2. 사용자 정보 모달에서:
+   - 이메일 확인
+   - **"로그아웃"** 버튼으로 로그아웃
+
+## 💻 개발자를 위한 설정
+
+### 설치
+
+```bash
+# 저장소 클론
+git clone [repository-url]
+cd accounting-web
+
+# 의존성 설치
+npm install
+```
+
+### 환경 변수 설정
+
+1. `.env.example` 파일을 복사하여 `.env` 파일 생성:
+```bash
+cp .env.example .env
+```
+
+2. `.env` 파일에 Firebase 설정 입력:
+```env
+VITE_FIREBASE_API_KEY=your_api_key
+VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain
+VITE_FIREBASE_PROJECT_ID=your_project_id
+VITE_FIREBASE_STORAGE_BUCKET=your_storage_bucket
+VITE_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
+VITE_FIREBASE_APP_ID=your_app_id
+VITE_FIREBASE_MEASUREMENT_ID=your_measurement_id
+```
+
+### 개발 서버 실행
+
+```bash
+npm run dev
+```
+
+브라우저에서 http://localhost:5173 접속
+
+### 프로덕션 빌드
+
+```bash
+npm run build
+```
+
+### Firebase 배포
+
+```bash
+firebase deploy
+```
+
+## 🔧 기술 스택
+
+- **Frontend**: React 18, Vite
+- **Backend**: Firebase (Authentication, Firestore)
+- **차트**: Recharts
+- **라우팅**: React Router v6
+- **스타일링**: CSS (Vanilla)
+- **배포**: Firebase Hosting
+
+## 🔐 보안
+
+- Firebase Authentication으로 사용자 인증
+- Firestore Security Rules로 데이터 접근 제어
+- 관리자 승인 시스템으로 사용자 관리
+- 환경 변수로 민감한 정보 관리
+
+## 📝 첫 관리자 설정
+
+첫 관리자는 Firebase Console에서 수동으로 설정해야 합니다:
+
+1. Firebase Console → Firestore Database 접속
+2. `users` 컬렉션 선택
+3. 관리자로 지정할 사용자 문서 클릭
+4. 다음 필드 수정:
+   - `role`: `"admin"`
+   - `approved`: `true`
+5. 저장
+
+## 📄 라이선스
+
+이 프로젝트는 개인 또는 상업적 용도로 자유롭게 사용할 수 있습니다.
+
+## 🤝 기여
+
+버그 리포트 및 기능 제안은 Issues를 통해 제출해주세요.
+
+---
+
+Made with ❤️ by studio unduck
