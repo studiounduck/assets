@@ -1,9 +1,43 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Allow users to read and write only their own data
-    match /users/{userId}/{document=**} {
-      allow read, write: if request.auth != null && request.auth.uid == userId;
+    // Helper function to check if user is approved
+    function isApproved() {
+      return request.auth != null && 
+             get(/databases/$(database)/documents/users/$(request.auth.uid)).data.approved == true;
+    }
+    
+    // Helper function to check if user is admin
+    function isAdmin() {
+      return request.auth != null && 
+             get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+    
+    // Users collection
+    match /users/{userId} {
+      // Anyone authenticated can read their own user document
+      // Admins can read all users
+      allow read: if (request.auth != null && request.auth.uid == userId) || isAdmin();
+      
+      // Admins can list all users (for admin page)
+      allow list: if isAdmin();
+      
+      // Only the user can create their own document (during signup)
+      allow create: if request.auth != null && request.auth.uid == userId;
+      
+      // Only admins can update user documents (for approval)
+      allow update: if isAdmin();
+      
+      // Only admins can delete users
+      allow delete: if isAdmin();
+      
+      // Transactions subcollection
+      match /transactions/{transactionId} {
+        // Only approved users can read/write their own transactions
+        allow read, write: if request.auth != null && 
+                              request.auth.uid == userId && 
+                              isApproved();
+      }
     }
   }
 }
