@@ -226,15 +226,15 @@ const TransactionsPage = ({ transactions, onTransactionAdded }) => {
                 <TransactionForm
                     initialData={editingTransaction}
                     onTransactionAdded={() => {
-                        onTransactionAdded();
+                        if (onTransactionAdded) onTransactionAdded();
                         handleClose();
                     }}
                     onTransactionUpdated={() => {
-                        onTransactionAdded();
+                        if (onTransactionAdded) onTransactionAdded();
                         handleClose();
                     }}
                     onTransactionDeleted={() => {
-                        onTransactionAdded();
+                        if (onTransactionAdded) onTransactionAdded();
                         handleClose();
                     }}
                     onClose={handleClose}
